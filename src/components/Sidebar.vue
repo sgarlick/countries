@@ -30,9 +30,8 @@
           <v-list-item
             v-for="continent in continents"
             :key="continent.code"
-            link
-          >
-            <v-list-item-icon>
+            link>
+            <v-list-item-icon @click="changeCont(continent)">
               <v-icon>{{ continent.code }}</v-icon>
             </v-list-item-icon>
   
@@ -49,6 +48,17 @@
 import axios from 'axios';
 export default {
   name: 'sidebar',
+  props: ['continent'],
+  methods: {
+    // Change continent
+    continentsFilter(continent) {
+      console.log(continent.code)
+    },
+    changeCont: function (continent) {
+      console.log(continent.code)
+        this.$emit('changeCont', continent.code);
+      }
+  },
   data() {
             return {
                 continents: []

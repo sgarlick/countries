@@ -1,8 +1,8 @@
 <template>
     <div class="loggedInMain">
       <Header/>
-      <Sidebar/>
-      <Body/>
+      <Sidebar  v-bind:continent="this.continent" @changeCont="changeCont"/>
+      <Body v-bind:continent="this.continent"/>
       <Footer/>
     </div>
 
@@ -22,6 +22,12 @@ export default {
     Footer,
     Sidebar
   },
+  methods: {
+    //Function for Side Bar to Change Continent
+   changeCont(code) {
+     this.continent = code
+    }
+  },
   computed: {
     username() {
       return this.$store.getters.user
@@ -29,7 +35,8 @@ export default {
     },
     data () {
       return {
-        title: "Results"
+        title: "Results",
+        continent: "EU"
       }
     }
 }   

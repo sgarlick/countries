@@ -1,14 +1,27 @@
 <template>
   <div class="resultsBody">
-    <v-card class="mx-auto" max-width="1060" tile
-       v-for="country in countries" :key="country.code">
-      <v-list-item class="result" @click="openDetails(country)">
-        <v-list-item-content>
-          <v-list-item-title>{{country.name}}</v-list-item-title>
-          <v-list-item-subtitle>{{country.native}}</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-    </v-card>
+    <div v-if="this.continent===null">
+      <v-card class="mx-auto" max-width="1060" tile
+        v-for="(country, index) in countries" :key="index">
+        <v-list-item class="result" @click="openDetails(country)">
+          <v-list-item-content>
+            <v-list-item-title>{{country.name}}</v-list-item-title>
+            <v-list-item-subtitle>{{country.native}}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+    </div>
+    <div v-else>
+      <v-card class="mx-auto" max-width="1060" tile
+        v-for="(country, index) in filteredCountries" :key="index">
+        <v-list-item class="result" @click="openDetails(country)">
+          <v-list-item-content>
+            <v-list-item-title>{{country.name}}</v-list-item-title>
+            <v-list-item-subtitle>{{country.native}}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+    </div>
     <div class="text-center" v-if="dialog">
       <Details v-bind:country="this.country" @closeDialog="closeDialog"/>
     </div>
@@ -20,8 +33,14 @@ import axios from 'axios';
 import Details from './Details'
 export default {
   name: 'Body',
+  props: ['continent'],
   components: {
     Details
+  },
+  computed: {
+  filteredCountries() {
+      return this.countries.filter(country => country.continent.code === this.continent)
+    }
   },
   methods: {
     // Open Modal Setting Country Prop
@@ -38,30 +57,13 @@ export default {
             return {
                 countries: [],
                 dialog: false,
-                country: null,
-                continent: null
+                country: null
             };
         },
+  
  // Run GraphQL Query and setting country state with response
  
   async mounted() {
-    // Query returns 404
-    // var query = `query {
-    //     continent(code:continent) {
-    //       countries{
-    //         name,
-    //         native,
-    //         phone,
-    //         currency,
-    //         continent {name,code},
-    //         languages {name,code},
-    //         emoji,
-    //         emojiU,
-    //         states {name}
-    //       }
-
-    //     }
-    //   }`;
       var query = `
                     query {
                         countries{
@@ -97,7 +99,7 @@ export default {
 <style scoped>
   .resultsBody{
     margin-left: 80px;
-    margin-top: 40px;
+    margin-top: 60px;
     padding:10px 20px 10px 20px;
     text-align: left;
     font-size: 20pt;
