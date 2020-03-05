@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import firebase from 'firebase'
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import router from '../router/index';
 Vue.use(Vuex);
 
@@ -48,7 +49,7 @@ export default new Vuex.Store({
         commit('setStatus', 'loading')
         firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
           .then((response) => {
-            console.log(response)
+            //console.log(response)
             commit('setUser', response.user.uid)
             commit('setStatus', 'success')
             commit('setError', null)
@@ -64,6 +65,7 @@ export default new Vuex.Store({
       signInAction ({ commit }, payload) {
         firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
           .then((response) => {
+            //console.log(response)
             commit('setUser', response.user.uid)
             commit('setStatus', 'success')
             commit('setError', null)

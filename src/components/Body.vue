@@ -39,7 +39,6 @@ export default {
   },
   computed: {
   filteredCountries() {
-    
     return this.countries.filter(country => country.continent.code === this.continent)
     }
   },
@@ -65,28 +64,25 @@ export default {
  // Run GraphQL Query and setting country state with response
  
   async mounted() {
-      var query = `
-                    query {
-                        countries{
-                            name,
-                            native,
-                            phone,
-                            currency,
-                            continent {name,code},
-                            languages {name,code},
-                            emoji,
-                            emojiU,
-                            states {name}
-                          }
-                      }`
-      console.log(query)
+      var query = `query {
+                    countries{
+                        name,
+                        native,
+                        phone,
+                        currency,
+                        continent {name,code},
+                        languages {name,code},
+                        emoji,
+                        emojiU,
+                        states {name}
+                      }
+                    }`
+      //console.log(query)
       try {
           var result = await axios({
               method: "POST",
               url: "https://countries.trevorblades.com/",
-              data: {
-                  query: query
-              }
+              data: {query: query}
           });
           this.countries = result.data.data.countries;
       } catch (error) {

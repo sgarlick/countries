@@ -55,7 +55,7 @@ export default {
       console.log(continent.code)
     },
     changeCont(continent) {
-      console.log(continent.code)
+      //console.log(continent.code)
         this.$emit('changeCont', continent.code);
       }
   },
