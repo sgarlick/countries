@@ -10,22 +10,20 @@ import Results from '@/components/Results'
 Vue.use(Router)
 
 const router = new Router({
-    mode: 'history',
-    base: process.env.BASE_URL,
     routes: [
         {
             path: '/results',
             name: 'Results',
             component: Results,
-            // meta: {
-            //     authRequired: true
-            // }
+            meta: {
+                authRequired: true
+            }
         },
         {
           path: '/',
           name: 'Login',
           component: Login
-      },
+        },
         {
           path: '/register',
           name: 'Register',
@@ -35,19 +33,17 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.authRequired)) {
-        if (!store.state.isAuthenticated) {
-            next({
-                path: '/'
-            });
-        } else {
-          next({
-            path: '/results'
-        });
-        }
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!store.getters.isLoggedIn) {
+      next({ name: 'Login' })
     } else {
-      next();
+      next({ name: 'Results' })
     }
-});
+  } else {
+    next() // does not require auth, make sure to always call next()!
+  }
+})
 
 export default router;

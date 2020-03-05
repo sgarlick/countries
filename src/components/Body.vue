@@ -38,31 +38,51 @@ export default {
             return {
                 countries: [],
                 dialog: false,
-                country: null
+                country: null,
+                continent: null
             };
         },
  // Run GraphQL Query and setting country state with response
+ 
   async mounted() {
+    // Query returns 404
+    // var query = `query {
+    //     continent(code:continent) {
+    //       countries{
+    //         name,
+    //         native,
+    //         phone,
+    //         currency,
+    //         continent {name,code},
+    //         languages {name,code},
+    //         emoji,
+    //         emojiU,
+    //         states {name}
+    //       }
+
+    //     }
+    //   }`;
+      var query = `
+                    query {
+                        countries{
+                          name,
+                          native,
+                          phone,
+                          currency,
+                          continent {name,code},
+                          languages {name,code},
+                          emoji,
+                          emojiU,
+                          states {name}
+                        }
+                    }
+                 `
       try {
           var result = await axios({
               method: "POST",
               url: "https://countries.trevorblades.com/",
               data: {
-                  query: `
-                    {
-                      countries {
-                        name,
-                        native,
-                        phone,
-                        currency,
-                        continent {name,code},
-                        languages {name,code},
-                        emoji,
-                        emojiU,
-                        states {name}
-                      }
-                    }
-                  `
+                  query: query
               }
           });
           this.countries = result.data.data.countries;
@@ -77,7 +97,7 @@ export default {
 <style scoped>
   .resultsBody{
     margin-left: 80px;
-    margin-top: 80px;
+    margin-top: 40px;
     padding:10px 20px 10px 20px;
     text-align: left;
     font-size: 20pt;
