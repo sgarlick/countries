@@ -19,6 +19,15 @@ const router = new Router({
                 authRequired: true
             }
         },
+        
+        {
+          path: '/#/results',
+          name: 'BRResults',
+          component: Results,
+          meta: {
+              authRequired: true
+          }
+      },
         {
           path: '/',
           name: 'Login',

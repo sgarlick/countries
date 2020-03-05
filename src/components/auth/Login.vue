@@ -15,15 +15,18 @@
 
                   <v-text-field v-model="password" :rules="passwordRules" label="Password" required
                     :type="passwordShow ? 'text' : 'password'"></v-text-field>
-                  <v-spacer />&nbsp;
-                  <v-btn color="success" :to="'/register'">Register</v-btn>&nbsp;
-                  <v-btn color="error" @click="reset">Reset</v-btn>&nbsp;
-                  <v-btn :disabled="!valid" color="success" @click="validate">Login</v-btn>
+                  <v-row>
+                    <v-spacer />
+                  <v-btn class="btn" color="success" :to="'/register'">Register</v-btn>&nbsp;
+                  <v-btn class="btn" color="error" @click="reset">Reset</v-btn>&nbsp;
+                  <v-btn class="btn" :disabled="!valid" color="success" @click="validate">Login</v-btn>
+                  </v-row>
                 </v-form>
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
+        
       </v-container>
     </v-content>
 
@@ -67,3 +70,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .btn {
+    margin:5px;
+  }
+</style>

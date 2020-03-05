@@ -39,7 +39,8 @@ export default {
   },
   computed: {
   filteredCountries() {
-      return this.countries.filter(country => country.continent.code === this.continent)
+    
+    return this.countries.filter(country => country.continent.code === this.continent)
     }
   },
   methods: {
@@ -67,18 +68,18 @@ export default {
       var query = `
                     query {
                         countries{
-                          name,
-                          native,
-                          phone,
-                          currency,
-                          continent {name,code},
-                          languages {name,code},
-                          emoji,
-                          emojiU,
-                          states {name}
-                        }
-                    }
-                 `
+                            name,
+                            native,
+                            phone,
+                            currency,
+                            continent {name,code},
+                            languages {name,code},
+                            emoji,
+                            emojiU,
+                            states {name}
+                          }
+                      }`
+      console.log(query)
       try {
           var result = await axios({
               method: "POST",
@@ -97,7 +98,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .resultsBody{
+  .resultsBody {
     margin-left: 80px;
     margin-top: 60px;
     padding:10px 20px 10px 20px;

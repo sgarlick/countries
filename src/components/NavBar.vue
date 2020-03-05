@@ -2,7 +2,7 @@
   <div class="navBar"  v-if="userLoggedIn" >
     <!-- display the navigation bar -->
     <v-toolbar-items class='hidden-xs-only'>
-        <v-btn @click='logoutFromFirebase'  mobileBreakPoint="320">
+        <v-btn @click='logoutFromFirebase' >
           Logout
         </v-btn>
       </v-toolbar-items>

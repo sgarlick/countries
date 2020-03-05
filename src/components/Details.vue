@@ -6,10 +6,14 @@
           <v-card-title class="headline grey lighten-2" primary-title>
             {{this.country.name}}
           </v-card-title>
-          <v-card-text>{{this.country.native}}</v-card-text>
+          <v-card-text></v-card-text>
+          <v-card-text>Native Country Name: {{this.country.native}}</v-card-text>
           <v-card-text><v-icon> {{this.country.emoji}}</v-icon></v-card-text>
            <v-card-text>
              Local Currency: {{this.country.currency}}
+          </v-card-text>
+          <v-card-text>
+             Local language: {{this.country.languages[0].name}}
           </v-card-text>
            <v-card-text>
              Phone Code +{{this.country.phone}}

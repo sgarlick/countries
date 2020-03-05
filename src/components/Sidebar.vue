@@ -31,11 +31,11 @@
             v-for="continent in continents"
             :key="continent.code"
             link>
-            <v-list-item-icon @click="changeCont(continent)">
+            <v-list-item-icon v-on:click="changeCont(continent)">
               <v-icon>{{ continent.code }}</v-icon>
             </v-list-item-icon>
   
-            <v-list-item-content>
+            <v-list-item-content v-on:click="changeCont(continent)">
               <v-list-item-title>{{ continent.name }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -54,7 +54,7 @@ export default {
     continentsFilter(continent) {
       console.log(continent.code)
     },
-    changeCont: function (continent) {
+    changeCont(continent) {
       console.log(continent.code)
         this.$emit('changeCont', continent.code);
       }

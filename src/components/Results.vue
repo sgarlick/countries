@@ -1,7 +1,7 @@
 <template>
     <div class="loggedInMain">
       <Header/>
-      <Sidebar  v-bind:continent="this.continent" @changeCont="changeCont"/>
+      <Sidebar v-bind:continent="this.continent" @changeCont="changeCont"/>
       <Body v-bind:continent="this.continent"/>
       <Footer/>
     </div>
@@ -36,7 +36,7 @@ export default {
     data () {
       return {
         title: "Results",
-        continent: "EU"
+        continent: null
       }
     }
 }   
