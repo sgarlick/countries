@@ -63,8 +63,6 @@ export default {
         password: this.password
       }
       this.$store.dispatch('signInAction', user);
-      //setTimeout(function(){ this.router.push('/results'); }, 300);
-      this.$router.push('/results')
     }
   }
 }

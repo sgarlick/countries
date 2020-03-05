@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import firebase from 'firebase'
-
+import router from '../router/index';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -49,9 +49,6 @@ export default new Vuex.Store({
         firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
           .then((response) => {
             console.log(response)
-            //alert('success')
-            // response will have user
-            // user will have uid will be updated to the state
             commit('setUser', response.user.uid)
             commit('setStatus', 'success')
             commit('setError', null)
@@ -60,7 +57,7 @@ export default new Vuex.Store({
             commit('setStatus', 'failure')
             commit('setError', error.message)
             alert(error.message)
-            this.$router.push('/register')
+            router.push('/register')
           })
       },
   
@@ -70,11 +67,13 @@ export default new Vuex.Store({
             commit('setUser', response.user.uid)
             commit('setStatus', 'success')
             commit('setError', null)
-            //this.$router.push('/results')
+            router.push('/results')
           })
           .catch((error) => {
             commit('setStatus', 'failure')
             commit('setError', error.message)
+            alert(error.message)
+            console.log(error.message)
           })
       },
     signOutAction ({ commit }) {
@@ -87,6 +86,7 @@ export default new Vuex.Store({
           .catch((error) => {
             commit('setStatus', 'failure')
             commit('setError', error.message)
+            router.push('/')
           })
       }
     },
